@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"path": "test/test"
+		},
+		{
+			"name": "webapp24101",
+			"path": "webapp24101"
+		}
+	],
+	"settings": {
+		"java.project.sourcePaths": [
+			"src"
+		],
+		"java.project.outputPath": "bin",
+		"java.project.referencedLibraries": [
+			"lib/**/*.jar"
+		]
+	}
+}

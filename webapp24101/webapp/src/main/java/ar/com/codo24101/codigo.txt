@@ -116,3 +116,195 @@ public class MainVehiculo {
 
     
 }
+
+04/06/2024
+package ar.com.codo24101.oop;
+
+public class Articulo {
+
+    /*atributos */
+    private String titulo;
+    private String autor;
+    private Float precio;
+    private String img;
+   
+    /* constructor/es */
+    public Articulo(String titulo, String autor, Float precio, String img) {
+        this.titulo = titulo;
+        this.autor = autor;
+        this.precio = precio;
+        this.img = img;
+    }
+
+    /*metodos: setters/getters */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
+    }
+
+    public Float getPrecio() {
+        return precio;
+    }
+
+    public void setPrecio(Float precio) {
+        this.precio = precio;
+    }
+
+    public String getImg() {
+        return img;
+    }
+
+    public void setImg(String img) {
+        this.img = img;
+    }
+
+    @Override
+    public String toString() {
+        return "{Articulo: {img:" + img + ", titulo:" + titulo + ", autor:" + autor + ", precio:" + precio + "}}";
+    }  
+ 
+    
+}
+
+
+package ar.com.codo24101.oop;
+
+public class Libro extends Articulo {
+
+    /*atributos */
+    private String isbn;
+
+    /*contructores */
+    public Libro(
+        String titulo, String autor, Float precio, String img,//es un articulo
+        String isbn
+    ) {
+        //nace el padre
+        super(titulo, autor, precio, img);
+
+        //nace el hijo
+        this.isbn = isbn;
+    }
+
+    /*metodos */
+    public String getIsbn() {
+        return isbn;
+    }
+
+    public void setIsbn(String isbn) {
+        this.isbn = isbn;
+    }
+
+    @Override
+    public String toString() {
+        //mostra lo del padre + lo del hijo
+        return super.toString()      + ", {Libro: {isbn=" + isbn + "}}";
+    } 
+    
+    
+}
+package ar.com.codo24101.oop;
+
+public class Pelicula extends Articulo{
+
+    private String genero;
+
+    public Pelicula(String titulo, String autor, Float precio, String img, String genero) {
+        super(titulo, autor, precio, img);
+        this.genero = genero;
+    }
+
+    public String getGenero() {
+        return genero;
+    }
+
+    public void setGenero(String genero) {
+        this.genero = genero;
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +  ", {Pelicula: {genero:" + genero + "}}";
+    }
+
+}
+
+package ar.com.codo24101.oop;
+
+import java.util.ArrayList;
+
+public class Buscador {
+
+    private String claveDeBusqueda;//null
+    private ArrayList<Articulo> resultados;//null
+
+    public Buscador() {
+        //cuando nace????
+        this.resultados = new ArrayList<>();
+    }
+
+    public int getCantidad() {
+        return this.resultados.size();
+    } 
+
+    public void setClave(String clave){
+        if(clave == null) {
+            this.claveDeBusqueda = "";
+        }else {
+            this.claveDeBusqueda = clave;
+        }
+    }
+
+    public void buscar() {
+        //"harcodear" los datos
+        
+        Libro art = new Libro(claveDeBusqueda,"sin autor",8800f, "http://bla.com.ar/img/bla.jpg","1234654");
+        //agrego al array de resultados
+        resultados.add(art);
+
+        Pelicula p = new Pelicula(claveDeBusqueda, "autor1", 6600f, "http://ble.com/img/ble.jpg", "TERROR");
+        resultados.add(p);
+    }
+
+    public void mostrarResultados() {
+        System.out.println("Hemos Encontrado "+ getCantidad() + " Resultados Para 'Iron Man'");
+
+        for(Articulo art : resultados) {
+            //polimorfismo
+            System.out.println(art.toString());
+        }
+    }
+}
+
+
+package ar.com.codo24101.oop;
+
+public class MainBuscador {
+
+    public static void main(String[] args) {
+        String claveEnviadaPorElUsuarioEnElForm = "harry potter";
+
+        //1 instancio el buscador
+        Buscador b = new Buscador();
+
+        //2 seteo la clave de busqueda
+        b.setClave(claveEnviadaPorElUsuarioEnElForm);
+
+        //3 busco
+        b.buscar();
+
+        //4 muestro los resultados
+        b.mostrarResultados();
+    }
+}

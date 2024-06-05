@@ -19,8 +19,7 @@ public class Libro extends Articulo {
 
     @Override
     public String toString() {
-        return "Libro [isbn=" + isbn + ", titulo=" + getTitulo() + ", autor= " + getAutor() + ", precio="
-                + getPrecio() + ", img=" + getImg() + "]";
+        return super.toString() + ", {Libro:{ isbn: " + isbn + "}}";
     }
 
 }

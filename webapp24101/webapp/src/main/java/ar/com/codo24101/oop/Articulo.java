@@ -46,5 +46,10 @@ public class Articulo {
         this.img = img;
     }
 
+    @Override
+    public String toString() {
+        return "Articulo:{" + "titulo: " + titulo + ", autor: " + autor + ", precio: " + precio + ", img: " + img + '}';
+    }
+
     
 }

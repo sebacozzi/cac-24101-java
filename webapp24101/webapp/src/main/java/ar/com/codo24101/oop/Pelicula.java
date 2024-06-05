@@ -19,10 +19,7 @@ public class Pelicula extends Articulo {
 
     @Override
     public String toString() {
-        return "Pelicula [genero=" + genero + "]";
+        return super.toString() + ", {Pelicula:{ genero: " + genero + "}}";
     }
-
-    
-
 
 }

@@ -26,7 +26,38 @@ public class Buscador {
     public void buscar() {
         for (int i = 0; i < 16; i++) {
             String id = String.valueOf(i + 1);
-            Libro l = new Libro("titulo "+ id, "autor " + id,154f, "Imagen "+ id,"isbn "+id);
+            int caso = (int) (Math.random() * 5);
+            Float precio = (float) (Math.random() * 10000f +5000);
+            switch (caso) {
+                case 0:
+                    resultados.add(new Libro("titulo " + id, "autor " + id, precio, "Imagen " + id, "isbn " + id));
+                    break;
+                case 1:
+                    resultados.add(new Pelicula("titulo " + id, "autor " + id, precio, "Imagen " + id, "genero " + id));
+                    break;
+                case 2:
+                    ArrayList<String> temas = new ArrayList<>();
+                    int countTemas = ((int) (Math.random() * 7 + 7));
+
+                    for (int j = 1; j < countTemas; j++) {
+                        temas.add("temas " + j);
+                    }
+
+                    resultados.add(new Musica("Musica " + id, "Autor" + id, precio, "Caratula " + id, temas));
+                    break;
+                case 3:
+                    break;
+                case 4:
+            }
+            System.out.print(caso + "-");
+        }
+        System.out.println("");
+    }
+
+    public void mostrarResultados() {
+        System.out.println("Hemos encontrado %d resultados para %s".formatted(getCantidad(), claveDeBusqueda));
+        for (Articulo a : resultados) {
+            System.out.println(a.toString());
         }
     }
 }

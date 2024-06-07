@@ -19,7 +19,7 @@ public class Musica extends Articulo {
         this.temas = temas;
     }
 
-    public ArrayList getTemas() {
+    public ArrayList<String> getTemas() {
         return temas;
     }
 

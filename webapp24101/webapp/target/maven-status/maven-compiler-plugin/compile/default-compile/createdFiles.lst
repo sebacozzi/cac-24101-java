@@ -1,9 +1,13 @@
 ar\com\codo24101\Main.class
 ar\com\codo24101\oop\Buscador.class
-ar\com\codo24101\Vehiculo.class
 ar\com\codo24101\oop\Articulo.class
-ar\com\codo24101\oop\Pelicula.class
 ar\com\codo24101\MainVehiculo.class
-ar\com\codo24101\oop\Libro.class
 ar\com\codo24101\oop\Musica.class
 ar\com\codo24101\oop\MainBuscador.class
+ar\com\codo24101\dao\MovieJDBCMysqlImpl.class
+ar\com\codo24101\dto\MovieDTO.class
+ar\com\codo24101\Vehiculo.class
+ar\com\codo24101\oop\Pelicula.class
+ar\com\codo24101\domain\Director.class
+ar\com\codo24101\dto\DirectorDTO.class
+ar\com\codo24101\oop\Libro.class

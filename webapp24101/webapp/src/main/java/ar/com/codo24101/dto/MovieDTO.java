@@ -14,6 +14,16 @@ public class MovieDTO {
     public MovieDTO() {
     }
 
+    public MovieDTO(String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.genero = genero;
+        this.calificacion = calificacion;
+        this.anio = anio;
+        this.estrellas = estrellas;
+        this.director = director;
+    }
+    
     public Long getId_movie() {
         return id_movie;
     }

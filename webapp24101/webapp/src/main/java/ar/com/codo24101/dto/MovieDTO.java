@@ -1,8 +1,8 @@
-package ar.com.codo24101.domain;
+package ar.com.codo24101.dto;
 
-public class Movie {
-
-    private Long id_movie;
+public class MovieDTO {
+    
+     private Long id_movie;
     private String nombre;
     private String descripcion;
     private String genero;
@@ -11,11 +11,10 @@ public class Movie {
     private Long estrellas;
     private Long director; //Director
 
-    public Movie() {
+    public MovieDTO() {
     }
 
-    public Movie(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
-        this.id_movie = id_movie;
+    public MovieDTO(String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.genero = genero;
@@ -24,17 +23,7 @@ public class Movie {
         this.estrellas = estrellas;
         this.director = director;
     }
-
-    public Movie(String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
-        this.nombre = nombre;
-        this.descripcion = descripcion;
-        this.genero = genero;
-        this.calificacion = calificacion;
-        this.anio = anio;
-        this.estrellas = estrellas;
-        this.director = director;
-    }
-
+    
     public Long getId_movie() {
         return id_movie;
     }
@@ -101,7 +90,7 @@ public class Movie {
 
     @Override
     public String toString() {
-        return "Movie{" + "id_movie=" + id_movie + ", nombre=" + nombre + ", descripcion=" + descripcion + ", genero=" + genero + ", calificacion=" + calificacion + ", anio=" + anio + ", estrellas=" + estrellas + ", director=" + director + '}';
+        return "MovieDTO{" + "id_movie=" + id_movie + ", nombre=" + nombre + ", descripcion=" + descripcion + ", genero=" + genero + ", calificacion=" + calificacion + ", anio=" + anio + ", estrellas=" + estrellas + ", director=" + director + '}';
     }
     
 }

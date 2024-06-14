@@ -5,23 +5,22 @@ import ar.com.codo24101.dto.MovieDTO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collection;
 
 public class MovieJDBCMysqlImpl implements MovieDAO {
 
     private final String nombreTabla = "movies";
-    
+
     @Override
     public Movie getByID(Long id) {
+
         String sql = "SELECT * FROM %s WHERE id_movie = %d".formatted(nombreTabla, id);
         Movie m = null;
-        Connection con = null;
-        try {
-            con = AdministradorDeConexiones.conectar();
 
-            PreparedStatement stat = con.prepareStatement(sql);
-            ResultSet rs = stat.executeQuery();
+        try {
+
+            ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
 
             while (rs.next()) {
                 Long idMovie = rs.getLong("id_movie");
@@ -37,10 +36,9 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
 
             }
 
+            AdministradorDeConexiones.desconectar();
         } catch (Exception e) {
             System.out.println("Error al recuperar Pelicula por id. " + e);
-        } finally {
-            AdministradorDeConexiones.desconectar(con);
         }
         return m;
     }
@@ -48,101 +46,84 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
     @Override
     public void create(MovieDTO movieDto) {
 
-        String sql = "INSERT INTO %s(nombre,descripcion,genero,calificacion,anio,estrellas,director) VALUES(?,?,?,?,?,?,?) ";
+        String sql = "INSERT INTO %s(nombre,descripcion,genero,calificacion,anio,estrellas,director) VALUES(\"%s\",\"%s\",\"%s\",\"%s\",\"%d\",\"%d\",\"%d\") ";
 
-        sql = sql.formatted(nombreTabla);
-
-        Connection con = null;
+        sql = sql.formatted(nombreTabla, movieDto.getNombre(),
+                movieDto.getDescripcion(),
+                movieDto.getGenero(),
+                movieDto.getCalificacion().toString(),/// Para datos con punto flotante utilizar toString para que envie con punto y no con coma
+                movieDto.getAnio(),
+                movieDto.getEstrellas(),
+                movieDto.getDirector());
         try {
-            con = AdministradorDeConexiones.conectar();
-            PreparedStatement ps = con.prepareStatement(sql);
-
-          ps.setString(1,movieDto.getNombre());
-          ps.setString(2,movieDto.getDescripcion());
-          ps.setString(3,movieDto.getGenero());
-          ps.setFloat(4,movieDto.getCalificacion());
-          ps.setLong(5,movieDto.getAnio());
-          ps.setLong(6,movieDto.getEstrellas());
-          ps.setLong(7,movieDto.getDirector());
-        
-            
-            int resultado = ps.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Pelicula agregada correctamente.");
-            } else {
-                System.out.println("No se pudo agregar la pelicula. Código resultado:: " + resultado);
-            }
-
+            System.out.println(sql);
+            AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
         } catch (Exception e) {
             System.out.println("Error al insertar nueva pelicula. " + e);
-        } finally {
-            AdministradorDeConexiones.desconectar(con);
+
         }
 
     }
 
     @Override
     public void update(MovieDTO movieDto) {
-        String sql = "UPDATE %s SET nombre = ?, descripcion = ?, genero = ? , calificacion = ?, anio = ?, estrellas = ?,director = ? WHERE id_movie = ?".formatted(nombreTabla);
-        Connection con = null;
+        String sql = "UPDATE %s SET nombre = \"%s\", descripcion = \"%s\", genero = \"%s\" , calificacion = \"%s\", anio = \"%d\", estrellas = \"%d\",director = \"%s\" WHERE id_movie = \"%d\"";
+
+        sql = sql.formatted(nombreTabla, movieDto.getNombre(),
+                movieDto.getDescripcion(),
+                movieDto.getGenero(),
+                movieDto.getCalificacion().toString(),
+                movieDto.getAnio(),
+                movieDto.getEstrellas(),
+                movieDto.getDirector(),
+                movieDto.getId_movie());
+
         try {
-            con = AdministradorDeConexiones.conectar();
-            PreparedStatement ps = con.prepareStatement(sql);
 
-          ps.setString(1,movieDto.getNombre());
-          ps.setString(2,movieDto.getDescripcion());
-          ps.setString(3,movieDto.getGenero());
-          ps.setFloat(4,movieDto.getCalificacion());
-          ps.setLong(5,movieDto.getAnio());
-          ps.setLong(6,movieDto.getEstrellas());
-          ps.setLong(7,movieDto.getDirector());
-          ps.setLong(8,movieDto.getId_movie());
-            
-            int resultado = ps.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Pelicula Modificada con exito.");
-            } else {
-                System.out.println("No se pudo modificar los datos de la pelicula. Código resultado:: " + resultado);
-            }
-
+            AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
         } catch (Exception e) {
             System.out.println("Error al actualizar la pelicula. " + e);
-        } finally {
-            AdministradorDeConexiones.desconectar(con);
         }
-
     }
 
     @Override
     public void delete(Long id) {
-        String sql = "DELETE FROM %s WHERE id_movie = %d".formatted(nombreTabla,id);
-        Connection con = null;
+        String sql = "DELETE FROM %s WHERE id_movie = %d".formatted(nombreTabla, id);
+
         try {
-            con = AdministradorDeConexiones.conectar();
-            
-            PreparedStatement ps = con.prepareStatement(sql);            
-            
-            int resultado = ps.executeUpdate();
-
-            if (resultado > 0) {
-                System.out.println("Pelicula eliminada con exito.");
-            } else {
-                System.out.println("No se pudo eliminar la pelicula. Código resultado:: " + resultado);
-            }
-
+            AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
         } catch (Exception e) {
             System.out.println("Error al eliminar la pelicula. " + e);
-        } finally {
-            AdministradorDeConexiones.desconectar(con);
         }
 
     }
 
     @Override
     public ArrayList<Movie> getLista() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        ArrayList<Movie> lista= new ArrayList<>();
+        String sql ="SELECT * FROM %s".formatted(nombreTabla);
+        
+        try {
+            ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
+            
+            while(rs.next()){
+                lista.add(new Movie(
+                        rs.getLong("id_movie"),
+                        rs.getString("nombre"),
+                        rs.getString("descripcion"),
+                        rs.getString("genero"),
+                        rs.getFloat("calificacion"),
+                        rs.getLong("anio"),
+                        rs.getLong("estrellas"),
+                        rs.getLong("director")));
+            }
+          AdministradorDeConexiones.desconectar();
+        } catch (Exception e) {
+            System.out.println("Fallo la consulta de todas las peliculas. "+ e);
+        } finally {
+        }
+        
+        return lista;
     }
 
     @Override
@@ -152,11 +133,19 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
 
     public static void main(String[] args) {
         MovieJDBCMysqlImpl mj = new MovieJDBCMysqlImpl();
+        System.out.println(mj.getByID(28l));
 
-        //mj.create(new MovieDTO("Pelicula de Prueba", "Descripcion de Prueba", "Genero1", 4.1f, 2024l, 2l, 2l));
-        mj.delete(26l);
+        // mj.delete(28l);
+        //mj.create(new MovieDTO("Pelicula de Prueba 29", "Descripcion de Prueba 29", "Genero 29", 44504.1f, 2024l, 2l, 4l));
+        //mj.update(new MovieDTO(29l, "Pelicula de Prueba 29", "Descripcion de Prueba 29", "Genero 29", 4.1f, 2024l, 2l, 4l));
         
-        System.out.println(mj.getByID(26l));
+        System.out.println("");
+        System.out.println(mj.getByID(25l));
+        ArrayList<Movie> al = mj.getLista();
+        
+        for (Movie movie : al) {
+            System.out.println(movie);
+        }
         
     }
 }

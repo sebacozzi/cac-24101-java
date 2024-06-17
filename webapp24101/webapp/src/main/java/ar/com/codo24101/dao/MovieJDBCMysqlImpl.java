@@ -4,41 +4,20 @@ import ar.com.codo24101.domain.Movie;
 import ar.com.codo24101.dto.MovieDTO;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-import java.util.Arrays;
 
-public class MovieJDBCMysqlImpl implements MovieDAO {
+
+public class MovieJDBCMysqlImpl implements DAO<Movie,MovieDTO> {
 
     private final String nombreTabla = "movies";
     private final String[] listaColumnas = {"id_movie", "nombre", "descripcion", "genero", "calificacion", "anio", "estrellas", "director"};
 
     @Override
     public Movie getByID(Long id) {
-        String sql = "SELECT * FROM %s WHERE id_movie = %d".formatted(nombreTabla, id);
-        Movie m = null;
-
-        try {
-
-            ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
-
-            while (rs.next()) {
-                Long idMovie = rs.getLong("id_movie");
-                String nombre = rs.getString("nombre");
-                String descripcion = rs.getString("descripcion");
-                String genero = rs.getString("genero");
-                Float calificacion = rs.getFloat("calificacion");
-                Long anio = rs.getLong("anio");
-                Long estrellas = rs.getLong("anio");
-                Long director = rs.getLong("director");
-
-                m = new Movie(idMovie, nombre, descripcion, genero, calificacion, anio, estrellas, director);
-
-            }
-
-            AdministradorDeConexiones.desconectar();
-        } catch (Exception e) {
-            System.out.println("Error al recuperar Pelicula por id. " + e);
+        ArrayList<Movie> l = getByVal("id_movie", id.toString());
+        if (!l.isEmpty()) {
+            return l.get(0);
         }
-        return m;
+        return null;
     }
 
     @Override
@@ -105,15 +84,7 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
             ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
 
             while (rs.next()) {
-                lista.add(new Movie(
-                        rs.getLong("id_movie"),
-                        rs.getString("nombre"),
-                        rs.getString("descripcion"),
-                        rs.getString("genero"),
-                        rs.getFloat("calificacion"),
-                        rs.getLong("anio"),
-                        rs.getLong("estrellas"),
-                        rs.getLong("director")));
+                lista.add(resultadoAMovie(rs));
             }
             AdministradorDeConexiones.desconectar();
         } catch (Exception e) {
@@ -125,42 +96,61 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
     }
 
     @Override
-    public Movie getByVal(String col, String val) {
-        Movie m = null;
-        String[] listaCol = col.split(",");
-        System.out.println("col: " + Arrays.toString(col.split(",")));
-        System.out.println("Length listaCol: " + listaCol.length);
-        if (col.length() == 0 || listaCol.length == 0) {
-            System.out.println("""
-                               No se paso ninguna columna para filtrado.
-                               Las columnas deben estar separadas por coma. Formato de lista de columnas: "col1,col2,col3,coln"
-                               Columnas admitidas: """ + Arrays.toString(listaColumnas));
-            return null;
-        } else {
-            String errorCheckCols = checkColumnas(listaColumnas, listaCol);
-            if (!errorCheckCols.isEmpty()) {
-                System.out.println("No existe la columna: \"" + errorCheckCols + "\"");
-                return null;
-            }
+    public ArrayList<Movie> getByVal(String columnas, String valores, String metodo) {
+        ArrayList<Movie> m = new ArrayList<>();
 
+        if (!validaColumnas(columnas,listaColumnas)) {
+            return null;
+        }
+        String[] listaCols = columnas.split(",");
+
+        if (!validaValores(valores, listaCols.length)) {
+            return null;
+        }
+        String[] listaValores = valores.split(",");
+
+        String sql = generarConsulta(nombreTabla, listaValores, listaCols, metodo);
+
+        System.out.println(sql);
+
+        try {
+            ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
+
+            while (rs.next()) {
+                m.add(resultadoAMovie(rs));
+            }
+        } catch (Exception e) {
+            System.out.println("Ocurrio un problema al recuperar lista de Peliculas. " + e);
+        } finally {
+            AdministradorDeConexiones.desconectar();
         }
 
-        System.out.println("!!Retorna Movie!!");
         return m;
     }
 
-    private String checkColumnas(String[] listaCols, String[] cols) {
-        String resultado = "";
-        for (String col : cols) {
-            if (!Arrays.toString(listaCols).contains(col)) {
-                resultado += col + ",";
-            }
+//    @Override
+//    public ArrayList<Movie> getByVal(String columna, String filtro) {
+//        return getByVal(columna, filtro.replaceAll(" ", "%"), "");
+//    }
+    
+    private Movie resultadoAMovie(ResultSet r) {
+        try {
+            Long idMovie = r.getLong("id_movie");
+            String nombre = r.getString("nombre");
+            String descripcion = r.getString("descripcion");
+            String genero = r.getString("genero");
+            Float calificacion = r.getFloat("calificacion");
+            Long anio = r.getLong("anio");
+            Long estrellas = r.getLong("anio");
+            Long director = r.getLong("director");
+            return new Movie(idMovie, nombre, descripcion, genero, calificacion, anio, estrellas, director);
+        } catch (Exception e) {
+            System.out.println("Se produjo al intentar obtener los datos de la consulta. "+ e);
+            return null;
         }
-        
-        resultado= String.join(",", resultado.split(","));
-        return resultado;
-    }
 
+    }
+    
     public static void main(String[] args) {
         MovieJDBCMysqlImpl mj = new MovieJDBCMysqlImpl();
         //System.out.println(mj.getByID(28l));
@@ -169,32 +159,67 @@ public class MovieJDBCMysqlImpl implements MovieDAO {
         //mj.create(new MovieDTO("Pelicula de Prueba 29", "Descripcion de Prueba 29", "Genero 29", 44504.1f, 2024l, 2l, 4l));
         //mj.update(new MovieDTO(29l, "Pelicula de Prueba 29", "Descripcion de Prueba 29", "Genero 29", 4.1f, 2024l, 2l, 4l));
 //        System.out.println("");
-//        System.out.println(mj.getByID(25l));
+        System.out.println(mj.getByID(30l));
 //        ArrayList<Movie> al = mj.getLista();
 //        
 //        for (Movie movie : al) {
 //            System.out.println(movie);
 //        }
         System.out.println("Sin valor en columnas:");
-        mj.getByVal(".", "hh");
+        mj.getByVal(".", "hh", "AND");
         System.out.println("");
         System.out.println("Con una sola columna:");
-        mj.getByVal("nombre", "hh");
+
         System.out.println("");
+        ArrayList<Movie> al = mj.getByVal("nombre", "hh", "OR");
+
+        if (al.isEmpty()) {
+            System.out.println("No hubo resultados para la busqueda");
+        } else {
+            for (Movie movie : al) {
+                System.out.println(movie);
+            }
+        }
+        System.out.println("");
+
         System.out.println("Con una columna mal: ");
-        mj.getByVal("directores", "hh");
+        mj.getByVal("directores", "hh", "OR");
         System.out.println("");
         System.out.println("Con 2 columnas:");
-        mj.getByVal("director,nombre,", "hh");
+        System.out.println("");
+        al = mj.getByVal("nombre,director", "el,2", "OR");
+
+        if (al.isEmpty()) {
+            System.out.println("No hubo resultados para la busqueda...");
+        } else {
+            for (Movie movie : al) {
+                System.out.println(movie);
+            }
+        }
+        System.out.println("");
+
         System.out.println("");
         System.out.println("Con 2 columnas mal:");
-        mj.getByVal("nombres,directores", "hh");
+        mj.getByVal("nombres,directores", "hh,ff", "OR");
         System.out.println("");
         System.out.println("Con 1 columna bien y 1 mal:");
-        mj.getByVal("nombres,director", "hh");
+        mj.getByVal("nombres,director", "hh,ghj", "OR");
         System.out.println("");
         System.out.println("Con 1 columna bien y 1 mal:");
-        mj.getByVal("nombres,director,", "hh");
+        mj.getByVal("nombres,director,", "hh,gf", "OR");
+        System.out.println("");
+        System.out.println("Con 1 columna bien y busqeda varias palabras:");
+        al = mj.getByVal("nombre", "fi el");
+
+        if (al.isEmpty()) {
+            System.out.println("No hubo resultados para la busqueda...");
+        } else {
+            for (Movie movie : al) {
+                System.out.println(movie);
+            }
+        }
+
         System.out.println("");
     }
+
 }

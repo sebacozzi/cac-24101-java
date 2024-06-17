@@ -1,20 +1,26 @@
 package ar.com.codo24101.dao;
 
-import ar.com.codo24101.domain.Movie;
-import ar.com.codo24101.dto.MovieDTO;
 import java.util.ArrayList;
 
-public interface MovieDAO {
+/**
+ *
+ * @author Usuario
+ * @param <Movie>
+ * @param <MovieDTO>
+ */
+public interface MovieDAO <T,E> {
 
-    public Movie getByID(Long id);
+    public T getByID(Long id);
 
-    public void create(MovieDTO movieDto);
+    public void create(E movieDto);
     
-    public void update(MovieDTO movieDto);
+    public void update(E movieDto);
     
     public void delete(Long id);
    
-    public ArrayList<Movie> getLista();
+    public ArrayList<T> getLista();
     
-    public Movie getByVal(String col,String val);
+    public ArrayList<T> getByVal(String columnas,String valores, String metodo);
+    
+    public ArrayList<T> getByVal(String columna,String filtro);
 }

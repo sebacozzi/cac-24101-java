@@ -1,10 +1,15 @@
-C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Libro.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\AdministradorDeConexiones.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\log\main\MainLog.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\MovieJDBCMysqlImpl.java
-C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\MovieDTO.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Usuario.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\log\EmailLogImpl.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\MainBuscador.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DirectorJDBCMysqlImpl.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Pelicula.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\Main.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Libro.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\MovieDTO.java
+C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DAO.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\log\service\LogService.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\log\SMSLogImpl.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\MainVehiculo.java
@@ -14,9 +19,7 @@ C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\DirectorDTO.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\Vehiculo.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Buscador.java
-C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Pelicula.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\MovieDAO.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Articulo.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Musica.java
-C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\Main.java
 C:\CodoACodo\Desarrollo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\log\ILog.java

@@ -10,6 +10,7 @@ ar\com\codo24101\MainVehiculo.class
 ar\com\codo24101\dao\DirectorJDBCMysqlImpl.class
 ar\com\codo24101\oop\Musica.class
 ar\com\codo24101\oop\MainBuscador.class
+ar\com\codo24101\main\Main.class
 ar\com\codo24101\dto\MovieDTO.class
 ar\com\codo24101\domain\Director.class
 ar\com\codo24101\dto\DirectorDTO.class

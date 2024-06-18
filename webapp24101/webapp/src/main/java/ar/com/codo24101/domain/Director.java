@@ -4,6 +4,8 @@
  */
 package ar.com.codo24101.domain;
 
+import ar.com.codo24101.dto.DirectorDTO;
+
 /**
  *
  * @author Usuario
@@ -13,14 +15,14 @@ public class Director {
     private String nombre;
     private String apellido;
     private Long edad;
-    private String nacionalidada;
+    private String nacionalidad;
 
-    public Director(Long id_director, String nombre, String apellido, Long edad, String nacionalidada) {
+    public Director(Long id_director, String nombre, String apellido, Long edad, String nacionalidad) {
         this.id_director = id_director;
         this.nombre = nombre;
         this.apellido = apellido;
         this.edad = edad;
-        this.nacionalidada = nacionalidada;
+        this.nacionalidad = nacionalidad;
     }
 
     public Director() {
@@ -59,17 +61,19 @@ public class Director {
     }
 
     public String getNacionalidada() {
-        return nacionalidada;
+        return nacionalidad;
     }
 
-    public void setNacionalidada(String nacionalidada) {
-        this.nacionalidada = nacionalidada;
+    public void setNacionalidad(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
     }
 
     
     @Override
     public String toString() {
-        return "Director{" + "id_director=" + id_director + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", nacionalidada=" + nacionalidada + '}';
+        return "Director{" + "id_director=" + id_director + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", nacionalidad=" + nacionalidad + '}';
     }
-    
+    public static Director DirectorDTOtoDirector(DirectorDTO d){
+        return new Director(d.getId_director(),d.getNombre(), d.getApellido(),d.getEdad(),d.getNacionalidad());
+    }
 }

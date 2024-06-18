@@ -14,8 +14,9 @@ public class DirectorDTO {
     private String nombre;
     private String apellido;
     private Long edad;
-    private String nacionalidada;
+    private String nacionalidad;
 
+    
     public Long getId_director() {
         return id_director;
     }
@@ -48,16 +49,16 @@ public class DirectorDTO {
         this.edad = edad;
     }
 
-    public String getNacionalidada() {
-        return nacionalidada;
+    public String getNacionalidad() {
+        return nacionalidad;
     }
 
-    public void setNacionalidada(String nacionalidada) {
-        this.nacionalidada = nacionalidada;
+    public void setNacionalidada(String nacionalidad) {
+        this.nacionalidad = nacionalidad;
     }
 
     @Override
     public String toString() {
-        return "Director{" + "id_director=" + id_director + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", nacionalidada=" + nacionalidada + '}';
+        return "Director{" + "id_director=" + id_director + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", nacionalidad=" + nacionalidad + '}';
     }
 }

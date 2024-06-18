@@ -1,5 +1,7 @@
 package ar.com.codo24101.domain;
 
+import ar.com.codo24101.dto.MovieDTO;
+
 public class Movie {
 
     private Long id_movie;
@@ -9,12 +11,12 @@ public class Movie {
     private Float calificacion;
     private Long anio;
     private Long estrellas;
-    private Long director; //Director
+    private Director director; //Director
 
     public Movie() {
     }
 
-    public Movie(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
+    public Movie(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Director director) {
         this.id_movie = id_movie;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -25,7 +27,7 @@ public class Movie {
         this.director = director;
     }
 
-    public Movie(String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Long director) {
+    public Movie(String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Director director) {
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.genero = genero;
@@ -91,11 +93,14 @@ public class Movie {
         this.estrellas = estrellas;
     }
 
-    public Long getDirector() {
+    public Director getDirector() {
         return director;
     }
-
-    public void setDirector(Long director) {
+    public Long getIdDirector(){
+        return director.getId_director();
+    }
+    
+    public void setDirector(Director director) {
         this.director = director;
     }
 
@@ -104,4 +109,19 @@ public class Movie {
         return "Movie{" + "id_movie=" + id_movie + ", nombre=" + nombre + ", descripcion=" + descripcion + ", genero=" + genero + ", calificacion=" + calificacion + ", anio=" + anio + ", estrellas=" + estrellas + ", director=" + director + '}';
     }
     
+    
+    public static MovieDTO movieToMovieDTO(Movie m){
+        if (m == null) return null;
+        MovieDTO mdto= new MovieDTO();
+        mdto.setId_movie(m.getId_movie());
+        mdto.setNombre(m.getNombre());
+        mdto.setDescripcion(m.getDescripcion());
+        mdto.setGenero(m.getGenero());
+        mdto.setCalificacion(m.getCalificacion());
+        mdto.setAnio(m.getAnio());
+        mdto.setEstrellas(m.getEstrellas());
+        mdto.setDirector(m.getIdDirector());
+        
+        return mdto;
+    }
 }

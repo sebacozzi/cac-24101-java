@@ -5,16 +5,13 @@ import java.util.Arrays;
 
 /**
  *
- * @param <T> parametro Entidad
- * @param <E> parametro DTO
+ * @param <T> parametro Entidad DTO
  */
-public interface DAO<T, E> {
+public interface DAO<T> {
 
-    
+    public void create(T Dto);
 
-    public void create(E Dto);
-
-    public void update(E Dto);
+    public void update(T Dto);
 
     public void delete(Long id);
 
@@ -23,14 +20,15 @@ public interface DAO<T, E> {
     public ArrayList<T> getByVal(String columnas, String valores, String metodo);
 
     //// default ////
-    
-    default T getByID(Long id){
+    default T getByID(Long id) {
         ArrayList<T> l = getByVal("id_movie", id.toString());
         if (!l.isEmpty()) {
             return l.get(0);
         }
         return null;
-    };
+    }
+
+    ;
     
     default ArrayList<T> getByVal(String columna, String filtro) {
         return getByVal(columna, filtro.replaceAll(" ", "%"), "");
@@ -94,5 +92,37 @@ public interface DAO<T, E> {
             }
         }
         return true;
+    }
+
+    default String crearSqlConsulta(String columnas, String valores, String nombreTabla, String[] listaColumnas, String metodo) throws Exception {
+        if (!validaColumnas(columnas, listaColumnas)) {
+            throw new Exception("Columnas incorrectas");
+        }
+        String[] listaCols = columnas.split(",");
+
+        if (!validaValores(valores, listaCols.length)) {
+            throw new Exception("Valores incorrectos, inconcordancia entre valores y columnas");
+        }
+        String[] listaValores = valores.split(",");
+
+        return generarConsulta(nombreTabla, listaValores, listaCols, metodo);
+    }
+    
+    default String formateo(String patron,String separador,String[] valores,String[] cols){
+        String resultado = "";     
+        
+        if (cols == null ){
+            for (int i = 0; i < valores.length; i++) {
+                valores[i] = patron.formatted(valores[i]);
+            }
+            resultado = String.join(separador, valores);
+        } else{
+            String[] temp = new String[valores.length];
+            for (int i = 0; i < valores.length; i++) {
+                temp[i] = patron.formatted(cols[i],valores[i]);
+            }
+            resultado = String.join(separador, temp);
+        }
+        return resultado;
     }
 }

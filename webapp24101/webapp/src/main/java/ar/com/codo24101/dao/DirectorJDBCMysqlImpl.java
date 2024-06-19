@@ -107,12 +107,26 @@ public class DirectorJDBCMysqlImpl implements DAO<DirectorDTO> {
         }
     }
     
-    private String[] directorDTOAArray(DirectorDTO d){
-        String[] resultado = new String[4];
+    private String directorDTOAArray(DirectorDTO d){
+        String resultado = "";
+        
+        if(d.getNombre() != null){
+            resultado += d.getNombre();
+        }
+        if(d.getNombre() != null){
+            resultado += d.getNombre();
+        }
+        if(d.getNombre() != null){
+            resultado += d.getNombre();
+        }
+        if(d.getNombre() != null){
+            resultado += d.getNombre();
+        }
         resultado[0]= d.getNombre();
         resultado[1] = d.getApellido();
         resultado[2] = d.getEdad().toString();
         resultado[3] = d.getNacionalidad();
+        
         return resultado;
     }
 

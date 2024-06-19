@@ -61,4 +61,33 @@ public class DirectorDTO {
     public String toString() {
         return "Director{" + "id_director=" + id_director + ", nombre=" + nombre + ", apellido=" + apellido + ", edad=" + edad + ", nacionalidad=" + nacionalidad + '}';
     }
+    
+  
+    /**
+     *
+     * @return Array [0] valores , [1] campos
+     */
+
+    public String[] getValues(){
+        String valores = "";
+        String campos ="";
+        if(!nombre.isBlank()){
+            valores += nombre+ ",";
+            campos += "nombre,";
+        }
+        if(!apellido.isBlank()){
+            valores +=apellido + ",";
+            campos += "apellido,";
+        }
+        if(edad !=0){
+            valores +=edad.toString() + ",";
+            campos += "edad,";
+        }
+        if(!nacionalidad.isBlank()){
+            valores += nacionalidad +",";
+            campos += "nacionalidad,";
+        }
+        String[] res={valores.substring(0, (valores.length()-1)), campos.substring(0, (campos.length()-1))};
+        return res;
+    }
 }

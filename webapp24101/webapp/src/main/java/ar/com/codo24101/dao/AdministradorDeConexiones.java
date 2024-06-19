@@ -5,9 +5,8 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
-import java.util.Collection;
 import java.util.Date;
-import jdk.jshell.spi.ExecutionControl;
+
 
 public class AdministradorDeConexiones {
 

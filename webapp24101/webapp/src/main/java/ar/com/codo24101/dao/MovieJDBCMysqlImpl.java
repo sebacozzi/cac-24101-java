@@ -90,6 +90,7 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
 
             while (rs.next()) {
                 m.add(resultadoAMovieDTO(rs));
+                
             }
             
         } catch (Exception e) {
@@ -113,7 +114,7 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
             m.setAnio(r.getLong("anio"));
             m.setEstrellas(r.getLong("estrellas"));
             m.setDirector(r.getLong("director"));
-
+            movieDTOAArray(m);
             return m;
         } catch (Exception e) {
             System.out.println("Se produjo al intentar obtener los datos de la consulta. " + e);
@@ -131,6 +132,15 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
         resultado[4] = m.getAnio().toString();
         resultado[5] = m.getEstrellas().toString();
         resultado[6] = m.getDirector().toString();
+        StringBuffer s  = new StringBuffer();
+        for (String st : resultado) {
+            
+            if (st != null || !st.isEmpty()){
+                s.append(st + ",");
+            }
+        }
+        s.setCharAt(s.length()-1, '\u0000');
+        System.out.println("String cols: ." + s+".");
         return resultado;
     }
 }

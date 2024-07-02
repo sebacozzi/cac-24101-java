@@ -7,6 +7,7 @@ import ar.com.codo24101.dto.UsuarioDTO;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 /**
  *
@@ -21,7 +22,7 @@ public class UsuarioJDBCMysqlImpl implements DAO<UsuarioDTO>{
         String sql = "INSERT INTO %s(%s) VALUES(%s) ";
         sql = sql.formatted(nombreTabla,
                 String.join(", ", listaInsert),
-                formateo("\"%s\"", ", ", directorDTOAArray(usuarioDto),null));
+                formateo("\"%s\"", ", ", directorDTOAArray(usuarioDto)));
 
         try {
             AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
@@ -36,7 +37,7 @@ public class UsuarioJDBCMysqlImpl implements DAO<UsuarioDTO>{
         String sql = "UPDATE %s SET nombre = \"%s\", apellido = \"%s\", edad = \"%d\" , nacionalidad = \"%s\" WHERE id_movie = \"%d\"";
 
         sql = sql.formatted(nombreTabla, usuarioDto.getNombre(),
-                formateo("%s = \"%s\"", ", ", directorDTOAArray(usuarioDto),listaInsert),
+                formateo("%s = \"%s\"", ", ", directorDTOAArray(usuarioDto)),
                 usuarioDto.getId_usuario().toString());
 
         try {
@@ -114,14 +115,25 @@ public class UsuarioJDBCMysqlImpl implements DAO<UsuarioDTO>{
         }
     }
     
-    private String[] directorDTOAArray(UsuarioDTO u){
-        String[] resultado = new String[5];
+    private HashMap<String,String> directorDTOAArray(UsuarioDTO u){
+        HashMap<String,String> resultado = new HashMap<>();
         
-        resultado[0]= u.getNombre();
-        resultado[1] = u.getApellido();
-        resultado[2] = u.getEmail();
-        resultado[3] = u.getFecha_nac().toString();
-        resultado[4] = u.getPais();
+        if(!u.getNombre().isBlank()){
+        resultado.put("nombre",  u.getNombre());
+        }
+        if(!u.getApellido().isBlank()){
+        resultado.put("apellido",  u.getApellido());
+        }
+        if(!u.getEmail().isBlank()){
+        resultado.put("email",  u.getEmail());
+        }
+        if(u.getFecha_nac()!= null){
+        resultado.put("fecha_nac",  u.getFecha_nac().toString());
+        }
+        if(!u.getPais().isBlank()){
+        resultado.put("pais",  u.getPais());
+        }
+        
         return resultado;
     }
 }

@@ -3,12 +3,14 @@ package ar.com.codo24101.dao;
 import ar.com.codo24101.dto.MovieDTO;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
 
     private final String nombreTabla = "movies";
     private final String[] listaColumnas = {"id_movie", "nombre", "descripcion", "genero", "calificacion", "anio", "estrellas", "director"};
-    private final String[] listaInsert = { "nombre", "descripcion", "genero", "calificacion", "anio", "estrellas", "director"};
+    private final String[] listaInsert = {"nombre", "descripcion", "genero", "calificacion", "anio", "estrellas", "director"};
 
     public MovieJDBCMysqlImpl() {
     }
@@ -17,12 +19,12 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
     public void create(MovieDTO movieDto) {
 
         String sql = "INSERT INTO %s(%s) VALUES(%s) ";
-        
-        sql = sql.formatted(nombreTabla, 
+
+        sql = sql.formatted(nombreTabla,
                 String.join(", ", listaInsert),
-                formateo("\"%s\"",", ", movieDTOAArray(movieDto),null));
+                formateo("\"%s\"", ", ", movieDTOAMap(movieDto)));
         try {
-           
+
             AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
         } catch (Exception e) {
             System.out.println("Error al insertar nueva pelicula. " + e);
@@ -33,9 +35,9 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
     @Override
     public void update(MovieDTO movieDto) {
         String sql = "UPDATE %s SET %s WHERE id_movie = \"%d\"";
-         
+
         sql = sql.formatted(nombreTabla, movieDto.getNombre(),
-                formateo("%s = \"%s\"",", ", movieDTOAArray(movieDto), listaInsert),
+                formateo("%s = \"%s\"", ", ", movieDTOAMap(movieDto)),
                 movieDto.getId_movie());
 
         try {
@@ -60,7 +62,7 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
 
     @Override
     public ArrayList<MovieDTO> getLista() {
-        
+
         ArrayList<MovieDTO> lista = new ArrayList<>();
         String sql = "SELECT * FROM %s".formatted(nombreTabla);
 
@@ -70,12 +72,12 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
             while (rs.next()) {
                 lista.add(resultadoAMovieDTO(rs));
             }
-           
+
             AdministradorDeConexiones.desconectar();
         } catch (Exception e) {
             System.out.println("Fallo la consulta de todas las peliculas. " + e);
         }
-        
+
         return lista;
     }
 
@@ -85,21 +87,22 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
 
         try {
             String sql = crearSqlConsulta(columnas, valores, nombreTabla, listaColumnas, metodo);
-            
+
             ResultSet rs = AdministradorDeConexiones.genericoConsulta(sql);
 
             while (rs.next()) {
                 m.add(resultadoAMovieDTO(rs));
-                
+
             }
-            
+            for (Map.Entry<String, String> en : movieDTOAMap(m.get(0)).entrySet()) {
+                System.out.println("Key: "+ en.getKey() + "  - Valor: "+ en.getValue());
+            }
         } catch (Exception e) {
             System.out.println("Ocurrio un problema al recuperar lista de Peliculas. " + e);
         } finally {
             AdministradorDeConexiones.desconectar();
         }
         
-            
         return m;
     }
 
@@ -114,33 +117,40 @@ public class MovieJDBCMysqlImpl implements DAO<MovieDTO> {
             m.setAnio(r.getLong("anio"));
             m.setEstrellas(r.getLong("estrellas"));
             m.setDirector(r.getLong("director"));
-            movieDTOAArray(m);
+            
             return m;
         } catch (Exception e) {
             System.out.println("Se produjo al intentar obtener los datos de la consulta. " + e);
             return null;
         }
     }
-    
-    
-    private String[] movieDTOAArray(MovieDTO m){
-        String[] resultado = new String[7];
-        resultado[0]= m.getNombre();
-        resultado[1] = m.getDescripcion();
-        resultado[2] = m.getGenero();
-        resultado[3] = m.getCalificacion().toString();
-        resultado[4] = m.getAnio().toString();
-        resultado[5] = m.getEstrellas().toString();
-        resultado[6] = m.getDirector().toString();
-        StringBuffer s  = new StringBuffer();
-        for (String st : resultado) {
-            
-            if (st != null || !st.isEmpty()){
-                s.append(st + ",");
-            }
+
+    private HashMap<String, String> movieDTOAMap(MovieDTO m) {
+        HashMap<String, String> resultado = new HashMap<>();
+        if (m.getNombre()!=null) {
+            resultado.put("nombre", m.getNombre());
         }
-        s.setCharAt(s.length()-1, '\u0000');
-        System.out.println("String cols: ." + s+".");
+        if (m.getDescripcion()!=null) {
+            resultado.put("descripcion", m.getDescripcion());
+        }
+        if (m.getGenero()!=null) {
+            resultado.put("genero", m.getGenero());
+        }
+        if (m.getCalificacion() != 0) {
+            resultado.put("calificacion", m.getCalificacion().toString().replaceAll(",", "."));
+        }
+        if (m.getAnio() != 0) {
+            resultado.put("anio", m.getAnio().toString());
+        }
+        if (isNull(m.getEstrellas())) {
+            resultado.put("estrellas", m.getEstrellas().toString());
+        }
+        if (m.getDirector() != 0) {
+            resultado.put("director", m.getDirector().toString());
+        }
+        System.out.println("Resultado: "+ resultado);
         return resultado;
     }
+    
+    
 }

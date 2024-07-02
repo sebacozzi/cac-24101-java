@@ -22,9 +22,11 @@ public class AdministradorDeConexiones {
         //Connection con = null;
         //System.
         try {
-
+            
             Class.forName(DRIVER);
+            log(true,"Driver MySql cargado");
             con = DriverManager.getConnection(URL, USER, PASSWORD);
+            log(true,"Conexión creada");
         } catch (Exception e) {
             System.out.println("Se produjo una falla en conexión. " + e);
         }

@@ -11,6 +11,7 @@ import ar.com.codo24101.domain.Director;
 import ar.com.codo24101.domain.Movie;
 import ar.com.codo24101.dto.DirectorDTO;
 import ar.com.codo24101.dto.MovieDTO;
+import java.util.ArrayList;
 
 /**
  *
@@ -25,8 +26,8 @@ public class MovieService {
         this.dirDao = new DirectorJDBCMysqlImpl();
     }
     
-    public Movie obtener(Long id){
-        return movieDTOAMovie(movieDao.getByID(id));
+    public MovieDTO obtener(Long id){
+        return movieDao.getByID(id);
     }
     public MovieDTO obtenerPelicula(Long id){
         return movieDao.getByID(id);
@@ -40,8 +41,18 @@ public class MovieService {
        movieDao.update(Movie.movieToMovieDTO(m));
    }
    
+   public ArrayList<MovieDTO> obtenerPeliculas(){
+       return movieDao.getLista();
+   }
    
-    
+   public ArrayList<MovieDTO> obtenerByVal(String columnas,String valores){
+       return movieDao.getByVal(columnas, valores);
+   }
+   
+   public ArrayList<MovieDTO> obtenerByVal(String columnas,String valores,String caso){
+       return movieDao.getByVal(columnas, valores,caso);
+   }
+  
     private Movie movieDTOAMovie(MovieDTO mdto){
         Movie m = new Movie();
         m.setId_movie(mdto.getId_movie());

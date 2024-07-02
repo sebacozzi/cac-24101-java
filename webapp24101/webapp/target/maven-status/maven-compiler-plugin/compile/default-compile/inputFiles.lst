@@ -1,30 +1,16 @@
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Movie.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\MainVehiculo.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\UsuarioJDBCMysqlImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Usuario.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Pelicula.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\service\LogService.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Buscador.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\main\Main.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\EmailLogImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\Vehiculo.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DirectorJDBCMysqlImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\main\MainLog.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\ILog.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\AdministradorDeConexiones.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\MovieDTO.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Articulo.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Libro.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\MainBuscador.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\SMSLogImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\MovieDAO.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\log\DefaultLogImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\Main.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DAO.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\MovieJDBCMysqlImpl.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Director.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\oop\Musica.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\UsuarioDTO.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\controller\crearMovieControler.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\service\MovieService.java
-D:\Codo a Codo\Desarrollo\Ejercicios\java\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\DirectorDTO.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\UsuarioJDBCMysqlImpl.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\AdministradorDeConexiones.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DirectorJDBCMysqlImpl.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\controller\ListarPeliculasController.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\MovieDTO.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\main\Main.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\DirectorDTO.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Director.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\MovieJDBCMysqlImpl.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\service\MovieService.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dao\DAO.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Movie.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\controller\crearMovieControler.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\filters\CorsFilter.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\domain\Usuario.java
+G:\Mi unidad\Codo a Codo\Ejercicios\JAVA\webapp24101\webapp\src\main\java\ar\com\codo24101\dto\UsuarioDTO.java

@@ -2,6 +2,8 @@ package ar.com.codo24101.dao;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  *
@@ -23,12 +25,10 @@ public interface DAO<T> {
     default T getByID(Long id) {
         ArrayList<T> l = getByVal("id_movie", id.toString());
         if (!l.isEmpty()) {
-            return l.get(0);
+            return (T) l.get(0);
         }
         return null;
-    }
-
-    ;
+    };
     
     default ArrayList<T> getByVal(String columna, String filtro) {
         return getByVal(columna, filtro.replaceAll(" ", "%"), "");
@@ -108,21 +108,51 @@ public interface DAO<T> {
         return generarConsulta(nombreTabla, listaValores, listaCols, metodo);
     }
     
-    default String formateo(String patron,String separador,String[] valores,String[] cols){
+    default String formateo(String patron,String separador,HashMap<String,String> valores){
         String resultado = "";     
         
-        if (cols == null ){
-            for (int i = 0; i < valores.length; i++) {
-                valores[i] = patron.formatted(valores[i]);
+        int indice =0;
+        int cont = 0;
+        while (patron.indexOf("%s", indice)!=-1){
+            cont++;
+            indice = patron.indexOf("%s", indice);
+            if (cont>50) {
+                System.out.println("OverFlow. cont: " + cont );
+                break;        
             }
-            resultado = String.join(separador, valores);
-        } else{
-            String[] temp = new String[valores.length];
-            for (int i = 0; i < valores.length; i++) {
-                temp[i] = patron.formatted(cols[i],valores[i]);
-            }
-            resultado = String.join(separador, temp);
         }
+        
+        if (cont==1) {
+            for (Map.Entry<String, String> entry : valores.entrySet()) {
+                resultado += patron.formatted( entry.getValue())+ separador;
+            }
+        }else if (cont ==2){
+            for (Map.Entry<String, String> entry : valores.entrySet()) {
+                resultado += patron.formatted(entry.getKey(), entry.getValue())+ separador;
+            }
+        }
+        if (!resultado.isBlank()) {
+            resultado = resultado.substring(0,resultado.length()-1);
+        }
+//        
+//        if (cols == null ){
+//            for (int i = 0; i < valores.length; i++) {
+//                valores[i] = patron.formatted(valores[i]);
+//            }
+//            resultado = String.join(separador, valores);
+//        } else{
+//            String[] temp = new String[valores.length];
+//            for (int i = 0; i < valores.length; i++) {
+//                temp[i] = patron.formatted(cols[i],valores[i]);
+//            }
+//            resultado = String.join(separador, temp);
+//        }
+
         return resultado;
     }
+    
+    default boolean isNull(Object c){
+        
+        return c == null;
+    };
 }

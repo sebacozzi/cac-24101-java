@@ -3,6 +3,8 @@ package ar.com.codo24101.dao;
 import ar.com.codo24101.dto.DirectorDTO;
 import java.sql.ResultSet;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 
 public class DirectorJDBCMysqlImpl implements DAO<DirectorDTO> {
 
@@ -15,7 +17,7 @@ public class DirectorJDBCMysqlImpl implements DAO<DirectorDTO> {
         String sql = "INSERT INTO %s(%s) VALUES(%s) ";
         sql = sql.formatted(nombreTabla,
                 String.join(", ", listaInsert),
-                formateo("\"%s\"", ", ", directorDTOAArray(directorDto),null));
+                formateo("\"%s\"", ", ", directorDTOAArray(directorDto)));
 
         try {
             AdministradorDeConexiones.genericoCrearActualizarBorrar(sql);
@@ -30,7 +32,7 @@ public class DirectorJDBCMysqlImpl implements DAO<DirectorDTO> {
         String sql = "UPDATE %s SET nombre = \"%s\", apellido = \"%s\", edad = \"%d\" , nacionalidad = \"%s\" WHERE id_movie = \"%d\"";
 
         sql = sql.formatted(nombreTabla, directorDto.getNombre(),
-                formateo("%s = \"%s\"", ", ", directorDTOAArray(directorDto),listaInsert),
+                formateo("%s = \"%s\"", ", ", directorDTOAArray(directorDto)),
                 directorDto.getId_director().toString());
 
         try {
@@ -107,26 +109,22 @@ public class DirectorJDBCMysqlImpl implements DAO<DirectorDTO> {
         }
     }
     
-    private String directorDTOAArray(DirectorDTO d){
-        String resultado = "";
+    public HashMap<String,String> directorDTOAArray(DirectorDTO d){
+        HashMap<String,String> resultado = new HashMap<>();
         
-        if(d.getNombre() != null){
-            resultado += d.getNombre();
+        if (d.getNombre()!=null){
+        resultado.put("nombre",d.getNombre());    
         }
-        if(d.getNombre() != null){
-            resultado += d.getNombre();
+        if (d.getApellido() !=null) {
+        resultado.put("apellido", d.getApellido());
         }
-        if(d.getNombre() != null){
-            resultado += d.getNombre();
+        if(d.getEdad()!= null){
+            resultado.put("edad",d.getEdad().toString());
         }
-        if(d.getNombre() != null){
-            resultado += d.getNombre();
+        if (d.getNacionalidad() != null){
+            resultado.put("nacionalidad", d.getNacionalidad());
         }
-        resultado[0]= d.getNombre();
-        resultado[1] = d.getApellido();
-        resultado[2] = d.getEdad().toString();
-        resultado[3] = d.getNacionalidad();
-        
+        System.out.println(resultado);
         return resultado;
     }
 

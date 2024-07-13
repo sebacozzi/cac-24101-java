@@ -11,19 +11,21 @@ import java.util.Map;
  */
 public interface DAO<T> {
 
-    public void create(T Dto);
+    public boolean create(T Dto);
 
-    public void update(T Dto);
+    public boolean update(T Dto);
 
-    public void delete(Long id);
+    public boolean delete(Long id);
 
     public ArrayList<T> getLista();
+    
+    public T getByName(String nombre);
 
     public ArrayList<T> getByVal(String columnas, String valores, String metodo);
 
     //// default ////
-    default T getByID(Long id) {
-        ArrayList<T> l = getByVal("id_movie", id.toString());
+    default T getByID(String colName,Long id) {
+        ArrayList<T> l = getByVal(colName, id.toString());
         if (!l.isEmpty()) {
             return (T) l.get(0);
         }
@@ -110,7 +112,7 @@ public interface DAO<T> {
     
     default String formateo(String patron,String separador,HashMap<String,String> valores){
         String resultado = "";     
-        
+           System.out.println(valores);
         int indice =0;
         int cont = 0;
         while (patron.indexOf("%s", indice)!=-1){
@@ -128,26 +130,13 @@ public interface DAO<T> {
             }
         }else if (cont ==2){
             for (Map.Entry<String, String> entry : valores.entrySet()) {
-                resultado += patron.formatted(entry.getKey(), entry.getValue())+ separador;
+                resultado += patron.formatted(entry.getKey(), entry.getValue()) + separador;
             }
         }
         if (!resultado.isBlank()) {
             resultado = resultado.substring(0,resultado.length()-1);
         }
-//        
-//        if (cols == null ){
-//            for (int i = 0; i < valores.length; i++) {
-//                valores[i] = patron.formatted(valores[i]);
-//            }
-//            resultado = String.join(separador, valores);
-//        } else{
-//            String[] temp = new String[valores.length];
-//            for (int i = 0; i < valores.length; i++) {
-//                temp[i] = patron.formatted(cols[i],valores[i]);
-//            }
-//            resultado = String.join(separador, temp);
-//        }
-
+        System.out.println("formateo: " + resultado);
         return resultado;
     }
     

@@ -11,12 +11,13 @@ public class Movie {
     private Float calificacion;
     private Long anio;
     private Long estrellas;
+    private String url_imagen;
     private Director director; //Director
 
     public Movie() {
     }
 
-    public Movie(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas, Director director) {
+    public Movie(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas,String url_imagen, Director director) {
         this.id_movie = id_movie;
         this.nombre = nombre;
         this.descripcion = descripcion;
@@ -24,6 +25,7 @@ public class Movie {
         this.calificacion = calificacion;
         this.anio = anio;
         this.estrellas = estrellas;
+        this.url_imagen = url_imagen;
         this.director = director;
     }
 
@@ -93,6 +95,14 @@ public class Movie {
         this.estrellas = estrellas;
     }
 
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
+    }
+
     public Director getDirector() {
         return director;
     }
@@ -120,6 +130,7 @@ public class Movie {
         mdto.setCalificacion(m.getCalificacion());
         mdto.setAnio(m.getAnio());
         mdto.setEstrellas(m.getEstrellas());
+        mdto.setUrl_imagen(m.getUrl_imagen());
         mdto.setDirector(m.getIdDirector());
         
         return mdto;

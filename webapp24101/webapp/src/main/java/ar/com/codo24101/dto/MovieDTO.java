@@ -2,6 +2,7 @@ package ar.com.codo24101.dto;
 
 public class MovieDTO {
 
+
     private Long id_movie;
     private String nombre;
     private String descripcion;
@@ -9,8 +10,26 @@ public class MovieDTO {
     private Float calificacion;
     private Long anio;
     private Long estrellas;
+    private String url_imagen;
     private Long director; //Director
 
+    public MovieDTO() {
+    }
+
+    public MovieDTO(Long id_movie, String nombre, String descripcion, String genero, Float calificacion, Long anio, Long estrellas,String url_imagen, Long director) {
+        this.id_movie = id_movie;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.genero = genero;
+        this.calificacion = calificacion;
+        this.anio = anio;
+        this.estrellas = estrellas;
+        this.url_imagen = url_imagen;
+        this.director = director;
+    }
+    
+    
+    
     public Long getId_movie() {
         return id_movie;
     }
@@ -73,6 +92,14 @@ public class MovieDTO {
 
     public void setDirector(Long director) {
         this.director = director;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 
     @Override

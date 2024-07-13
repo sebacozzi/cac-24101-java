@@ -45,19 +45,21 @@ public class AdministradorDeConexiones {
         }
     }
 
-    public static void genericoCrearActualizarBorrar(String sql) throws Exception {
+    public static boolean genericoCrearActualizarBorrar(String sql) throws Exception {
         final String aRealizar = sql.split(" ")[0];
-
+        boolean ret=false;
         try {
             conectar();
             stat = con.createStatement();
-            boolean ret = stat.execute(sql);
-            log((aRealizar.equalsIgnoreCase("DELETE") ? true : ret), aRealizar);
+            ret = stat.execute(sql);
+            ret = (aRealizar.equalsIgnoreCase("DELETE") ? true : ret);
+            log(ret, aRealizar);
 
         } catch (Exception e) {
             System.out.println("Se produjo una falla en " + aRealizar + ". " + e);
         } finally {
             desconectar();
+            return ret;
         }
     }
 

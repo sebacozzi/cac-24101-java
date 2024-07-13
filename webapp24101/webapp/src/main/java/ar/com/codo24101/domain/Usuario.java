@@ -17,17 +17,19 @@ public class Usuario {
     private String email;
     private LocalDate fecha_nac;
     private String pais;
+    private String url_imagen;
 
     public Usuario() {
     }
 
-    public Usuario(Long id_usuario, String nombre, String apellido, String email, LocalDate fecha_nac, String pais) {
+    public Usuario(Long id_usuario, String nombre, String apellido, String email, LocalDate fecha_nac, String pais, String url_imagen) {
         this.id_usuario = id_usuario;
         this.nombre = nombre;
         this.apellido = apellido;
         this.email = email;
         this.fecha_nac = fecha_nac;
         this.pais = pais;
+        this.url_imagen = url_imagen;
     }
 
     public Long getId_usuario() {
@@ -76,6 +78,14 @@ public class Usuario {
 
     public void setPais(String pais) {
         this.pais = pais;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 
     @Override

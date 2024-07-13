@@ -15,6 +15,7 @@ public class DirectorDTO {
     private String apellido;
     private Long edad;
     private String nacionalidad;
+    private String url_imagen;
 
     
     public Long getId_director() {
@@ -53,8 +54,16 @@ public class DirectorDTO {
         return nacionalidad;
     }
 
-    public void setNacionalidada(String nacionalidad) {
+    public void setNacionalidad(String nacionalidad) {
         this.nacionalidad = nacionalidad;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
     }
 
     @Override
@@ -68,7 +77,7 @@ public class DirectorDTO {
      * @return Array [0] valores , [1] campos
      */
 
-    public String[] getValues(){
+    public String[] generarValues(){
         String valores = "";
         String campos ="";
         if(!nombre.isBlank()){

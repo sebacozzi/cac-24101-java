@@ -17,6 +17,8 @@ public class UsuarioDTO {
     private String email;
     private LocalDate fecha_nac;
     private String pais;
+    private String password;
+    private String url_imagen;
 
     public UsuarioDTO() {
     }
@@ -68,6 +70,23 @@ public class UsuarioDTO {
     public void setPais(String pais) {
         this.pais = pais;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getUrl_imagen() {
+        return url_imagen;
+    }
+
+    public void setUrl_imagen(String url_imagen) {
+        this.url_imagen = url_imagen;
+    }
+    
     
     @Override
     public String toString() {

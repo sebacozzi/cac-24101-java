@@ -1,8 +1,8 @@
 
 package ar.com.codo24101.main;
 
-import ar.com.codo24101.dao.DirectorJDBCMysqlImpl;
-import ar.com.codo24101.dao.MovieJDBCMysqlImpl;
+import ar.com.codo24101.Implements.DirectorJDBCMysqlImpl;
+import ar.com.codo24101.Implements.MovieJDBCMysqlImpl;
 import ar.com.codo24101.dto.MovieDTO;
 import ar.com.codo24101.service.MovieService;
 import java.util.ArrayList;

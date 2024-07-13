@@ -5,8 +5,8 @@
 package ar.com.codo24101.service;
 
 import ar.com.codo24101.dao.DAO;
-import ar.com.codo24101.dao.DirectorJDBCMysqlImpl;
-import ar.com.codo24101.dao.MovieJDBCMysqlImpl;
+import ar.com.codo24101.Implements.DirectorJDBCMysqlImpl;
+import ar.com.codo24101.Implements.MovieJDBCMysqlImpl;
 import ar.com.codo24101.domain.Director;
 import ar.com.codo24101.domain.Movie;
 import ar.com.codo24101.dto.DirectorDTO;
@@ -26,19 +26,26 @@ public class MovieService {
         this.dirDao = new DirectorJDBCMysqlImpl();
     }
     
+    public boolean crear(MovieDTO movieDto ){
+       movieDao.create(movieDto);
+        return movieDao.getByName(movieDto.getNombre())!=null;
+    }
+    
     public MovieDTO obtener(Long id){
-        return movieDao.getByID(id);
+        return movieDao.getByID("id_movie",id);
     }
-    public MovieDTO obtenerPelicula(Long id){
-        return movieDao.getByID(id);
+    public MovieDTO obtenerPelicula(String nombre){
+        return movieDao.getByName(nombre);
     }
     
-    public void elimanarPelicula(Long id){
+    public boolean eliminarPelicula(Long id){
         movieDao.delete(id);
+        return movieDao.getByID("id_movie",id) == null;
     }
     
-   public void actualizarPelicula(Movie m){
-       movieDao.update(Movie.movieToMovieDTO(m));
+   public boolean actualizarPelicula(MovieDTO m){
+      
+      return movieDao.update(m);
    }
    
    public ArrayList<MovieDTO> obtenerPeliculas(){
@@ -61,7 +68,7 @@ public class MovieService {
         m.setGenero(mdto.getGenero());
         m.setCalificacion(mdto.getCalificacion());
         m.setEstrellas(mdto.getEstrellas());
-        m.setDirector(Director.DirectorDTOtoDirector(dirDao.getByID(mdto.getDirector())));
+        m.setDirector(Director.DirectorDTOtoDirector(dirDao.getByID("id_director",mdto.getDirector())));
         
         return m;
     }

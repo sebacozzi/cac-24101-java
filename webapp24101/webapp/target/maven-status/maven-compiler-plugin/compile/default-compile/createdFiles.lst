@@ -19,14 +19,14 @@ ar\com\codo24101\Interfaces\Validaciones.class
 ar\com\codo24101\domain\Movie.class
 ar\com\codo24101\controller\UsuarioController.class
 ar\com\codo24101\main\Main.class
-ar\com\codo24101\dto\MovieDTO.class
 ar\com\codo24101\dto\UsuarioLoginDTO.class
+ar\com\codo24101\dto\MovieDTO.class
 ar\com\codo24101\controller\LoginSessionController.class
 ar\com\codo24101\filters\CorsFilter.class
 ar\com\codo24101\controller\RaizController.class
 ar\com\codo24101\domain\Director.class
 ar\com\codo24101\Implements\UsuarioLoginJDBCMysqlImpl.class
-ar\com\codo24101\dto\UsuarioCRUDDTO.class
 ar\com\codo24101\dto\DirectorDTO.class
+ar\com\codo24101\dto\UsuarioCRUDDTO.class
 ar\com\codo24101\dto\DirectorCRUDDTO.class
 ar\com\codo24101\service\UsuarioService.class

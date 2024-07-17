@@ -14,6 +14,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,12 +60,18 @@ public class LoginSessionController extends HttpServlet {
                                        {"nombre":"%s",
                                        "apellido":"%s",
                                        "roles":"%s",
-                                       "token": "%s"}""".formatted(usuarioLogin.getNombre(),usuarioLogin.getApellido() ,usuarioLogin.rolesAString(),tok));            
+                                       "vence":"%s",
+                                       "token": "%s"}""".formatted(usuarioLogin.getNombre(),usuarioLogin.getApellido() ,usuarioLogin.rolesAString(),fechaHora(),tok));            
                 resp.getWriter().flush();
             } catch (Exception ex) {
                 Logger.getLogger(LoginSessionController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         
+    }
+    private String fechaHora(){
+        Calendar ca = Calendar.getInstance();
+        ca.add(Calendar.MINUTE, 30);
+        return ca.getTime().toString();        
     }
 }

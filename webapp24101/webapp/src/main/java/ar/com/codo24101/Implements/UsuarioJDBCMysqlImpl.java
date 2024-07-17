@@ -126,7 +126,7 @@ public class UsuarioJDBCMysqlImpl implements DAO<UsuarioDTO>{
             d.setFecha_nac(r.getDate(listaColumnas[4]).toLocalDate());
             d.setPais(r.getString(listaColumnas[5]));
             d.setPassword(r.getString(listaColumnas[6]));
-            
+            d.setUrl_imagen(r.getString(listaColumnas[7]));
          
             return d;
         } catch (Exception e) {
